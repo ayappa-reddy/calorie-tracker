@@ -10,5 +10,60 @@
 </head>
 
 <body>
+  <div class="container">
+    <!-- Navbar -->
+    <nav class="nav">
+      <ul class="nav__nav-list">
+        <li class="nav__nav-item">
+          <a href="#" class="nav__nav-link nav__nav-link--brand">
+            Tracalorie
+          </a>
+        </li>
+        <li class="nav__nav-item">
+          <a href="#" class="nav__nav-link nav__nav-link clear btn btn--clear">
+            CLEAR ALL
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!--Input Form-->
+    <div class="form-wrapper">
+      <form class="form">
+        <h3 class="heading--secodary">Add Meal / Food Item</h3>
+        <div class="form__group">
+          <label class="form__label">Meal</label>
+          <input type="text" class="form__input" placeholder="Add Item">
+        </div>
+        <div class="form__group">
+          <label class="form__label">Calories</label>
+          <input type="number" class="form__input" placeholder="Add Calories">
+        </div>
+        <button class="btn btn--add" type="submit">
+          ADD MEAL
+        </button>
+        <button class="btn btn--update" type="submit">
+          UPDATE MEAL
+        </button>
+        <button class="btn btn--delete" type="submit">
+          DELETE MEAL
+        </button>
+        <button class="btn btn--back" type="submit">
+          BACK
+        </button>
+      </form>
+    </div>
+
+    <!-- Total Calories -->
+    <div class="heading-box">
+      <h1 class="heading-primary">Total Calories:
+        <span class="heading-primary__total-calories"></span>
+      </h1>
+    </div>
+
+    <!-- Meal List -->
+    <ul class="item-list">
+    </ul>
+  </div>
   <script src="app.js"></script>
 </body>
