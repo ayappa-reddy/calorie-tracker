@@ -69,23 +69,6 @@ const UICtrl = (function UICtrl() {
   return {
     UISelectors,
 
-    hideEditBtns() {
-      document.querySelector(UISelectors.addBtn).style.display = "inline-block";
-      document.querySelector(UISelectors.updateBtn).style.display = "none";
-      document.querySelector(UISelectors.deleteBtn).style.display = "none";
-      document.querySelector(UISelectors.backBtn).style.display = "none";
-    },
-
-    showEditBtns() {
-      document.querySelector(UISelectors.addBtn).style.display = "none";
-      document.querySelector(UISelectors.updateBtn).style.display =
-        "inline-block";
-      document.querySelector(UISelectors.deleteBtn).style.display =
-        "inline-block";
-      document.querySelector(UISelectors.backBtn).style.display =
-        "inline-block";
-    },
-
     displayItems(items) {
       let html = "";
 
@@ -120,6 +103,30 @@ const UICtrl = (function UICtrl() {
         name,
         calories
       };
+    },
+
+    hideEditBtns() {
+      document.querySelector(UISelectors.addBtn).style.display = "inline-block";
+      document.querySelector(UISelectors.updateBtn).style.display = "none";
+      document.querySelector(UISelectors.deleteBtn).style.display = "none";
+      document.querySelector(UISelectors.backBtn).style.display = "none";
+    },
+
+    showEditBtns() {
+      document.querySelector(UISelectors.addBtn).style.display = "none";
+      document.querySelector(UISelectors.updateBtn).style.display =
+        "inline-block";
+      document.querySelector(UISelectors.deleteBtn).style.display =
+        "inline-block";
+      document.querySelector(UISelectors.backBtn).style.display =
+        "inline-block";
+    },
+
+    clearInputs() {
+      const { mealInputEl, caloriesInputEl } = UISelectors;
+
+      document.querySelector(mealInputEl).value = "";
+      document.querySelector(caloriesInputEl).value = "";
     }
   };
 })();
@@ -133,6 +140,7 @@ const App = (function App(StorageCtrl, ItemCtrl, UICtrl) {
 
     if (name && calories) {
       ItemCtrl.addItem(name, calories);
+      UICtrl.clearInputs();
       UICtrl.displayItems(items);
       UICtrl.displayTotalCalories();
     }
