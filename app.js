@@ -5,11 +5,7 @@ const StorageCtrl = (function StorageCtrl() {})();
 const ItemCtrl = (function ItemCtrl() {
   // State for the whole application
   const data = {
-    items: [
-      { id: 0, name: "Chicken", calories: 500 },
-      { id: 1, name: "Steak", calories: 800 },
-      { id: 2, name: "Eggs", calories: 300 }
-    ],
+    items: [],
     currentItemToEdit: null,
     totalCalories: 0
   };
@@ -37,7 +33,7 @@ const ItemCtrl = (function ItemCtrl() {
       let totalCalories = 0;
 
       data.items.forEach(item => {
-        totalCalories += item.calories;
+        totalCalories += parseInt(item.calories);
       });
 
       data.totalCalories = totalCalories;
@@ -47,7 +43,7 @@ const ItemCtrl = (function ItemCtrl() {
 
     // Add new items to the data
     addItem(name, calories) {
-      const item = { id: generateID, name, calories };
+      const item = { id: generateID(), name, calories };
       data.items.push(item);
     },
 
@@ -87,10 +83,23 @@ const UICtrl = (function UICtrl() {
       document.querySelector(UISelectors.itemListEl).innerHTML = html;
     },
 
-    displayTotalCalories(totalCalories) {
+    displayTotalCalories() {
+      let totalCalories = ItemCtrl.getTotalCalories();
       document.querySelector(
         UISelectors.totalCaloriesEl
-      ).innerHTML = totalCalories;
+      ).textContent = totalCalories;
+    },
+
+    getInputVals() {
+      const { mealInputEl, caloriesInputEl } = UISelectors;
+
+      let name = document.querySelector(mealInputEl).value;
+      let calories = document.querySelector(caloriesInputEl).value;
+
+      return {
+        name,
+        calories
+      };
     }
   };
 })();
@@ -99,19 +108,29 @@ const UICtrl = (function UICtrl() {
 const App = (function App(StorageCtrl, ItemCtrl, UICtrl) {
   const items = ItemCtrl.getItems();
 
-  const totalCalories = ItemCtrl.getTotalCalories();
+  const addMealItem = function addMealItem(e) {
+    const { name, calories } = UICtrl.getInputVals();
+
+    if (name && calories) {
+      ItemCtrl.addItem(name, calories);
+      UICtrl.displayItems(items);
+      UICtrl.displayTotalCalories();
+    }
+
+    e.preventDefault();
+  };
 
   // Event Listeners
   const loadAllEventListeners = function loadAllEventListeners() {
     document
       .querySelector(UICtrl.UISelectors.addBtn)
-      .addEventListener("click", function() {});
+      .addEventListener("click", addMealItem);
   };
 
   return {
     init() {
       UICtrl.displayItems(items);
-      UICtrl.displayTotalCalories(totalCalories);
+      UICtrl.displayTotalCalories();
 
       loadAllEventListeners();
     }
