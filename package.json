@@ -1,0 +1,16 @@
+{
+  "name": "tracalorie",
+  "version": "1.0.0",
+  "description": "Meal and Calorie Tracker",
+  "main": "index.js",
+  "author": "Ayappa Reddy",
+  "license": "MIT",
+  "scripts": {
+    "compile:sass": "node-sass main.scss app.css",
+    "watch:sass": "nodemon -e scss -x \"npm run compile:sass\""
+  },
+  "devDependencies": {
+    "node-sass": "^4.9.0",
+    "nodemon": "^1.17.5"
+  }
+}
