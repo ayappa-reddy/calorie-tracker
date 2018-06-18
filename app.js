@@ -5,7 +5,7 @@ const StorageCtrl = (function StorageCtrl() {})();
 const ItemCtrl = (function ItemCtrl() {
   // State for the whole application
   const data = {
-    items: [],
+    items: [{ id: 0, name: "foo", calories: 500 }],
     currentItemToEdit: null,
     totalCalories: 0
   };
@@ -76,6 +76,16 @@ const UICtrl = (function UICtrl() {
       document.querySelector(UISelectors.backBtn).style.display = "none";
     },
 
+    showEditBtns() {
+      document.querySelector(UISelectors.addBtn).style.display = "none";
+      document.querySelector(UISelectors.updateBtn).style.display =
+        "inline-block";
+      document.querySelector(UISelectors.deleteBtn).style.display =
+        "inline-block";
+      document.querySelector(UISelectors.backBtn).style.display =
+        "inline-block";
+    },
+
     displayItems(items) {
       let html = "";
 
@@ -85,7 +95,7 @@ const UICtrl = (function UICtrl() {
           <strong class="item-list__meal">${item.name}:
           </strong>
           <em class="item-list__calories">${item.calories} Calories</em>
-          <span class="item-list__edit-item">E</span>
+          <span class="item-list__edit-icon">E</span>
         </li>
         `;
       });
@@ -130,11 +140,30 @@ const App = (function App(StorageCtrl, ItemCtrl, UICtrl) {
     e.preventDefault();
   };
 
+  const editMealItem = function editMealItem(e) {
+    if (e.target.classList.contains("item-list__edit-icon")) {
+      UICtrl.showEditBtns();
+    }
+
+    e.preventDefault();
+  };
+
+  // Prevent default Enter keypress from submitting the form
+  const preventEnterKeyPress = function preventEnterKeyPress(e) {
+    if (e.keycode === 13 || e.which === 13) {
+      e.preventDefault();
+    }
+  };
+
   // Event Listeners
   const loadAllEventListeners = function loadAllEventListeners() {
     document
       .querySelector(UICtrl.UISelectors.addBtn)
       .addEventListener("click", addMealItem);
+    document
+      .querySelector(".item-list")
+      .addEventListener("click", editMealItem);
+    document.addEventListener("keypress", preventEnterKeyPress);
   };
 
   return {
