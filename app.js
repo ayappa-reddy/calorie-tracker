@@ -60,11 +60,21 @@ const UICtrl = (function UICtrl() {
     totalCaloriesEl: ".heading-primary__total-calories",
     mealInputEl: ".form__input--meal",
     caloriesInputEl: ".form__input--calories",
-    addBtn: ".btn--add"
+    addBtn: ".btn--add",
+    updateBtn: ".btn--update",
+    deleteBtn: ".btn--delete",
+    backBtn: ".btn--back"
   };
 
   return {
     UISelectors,
+
+    hideEditBtns() {
+      document.querySelector(UISelectors.addBtn).style.display = "inline-block";
+      document.querySelector(UISelectors.updateBtn).style.display = "none";
+      document.querySelector(UISelectors.deleteBtn).style.display = "none";
+      document.querySelector(UISelectors.backBtn).style.display = "none";
+    },
 
     displayItems(items) {
       let html = "";
@@ -129,6 +139,7 @@ const App = (function App(StorageCtrl, ItemCtrl, UICtrl) {
 
   return {
     init() {
+      UICtrl.hideEditBtns();
       UICtrl.displayItems(items);
       UICtrl.displayTotalCalories();
 
