@@ -3,6 +3,7 @@ const StorageCtrl = (function StorageCtrl() {})();
 
 // Item Controller
 const ItemCtrl = (function ItemCtrl() {
+  // State for the whole application
   const data = {
     items: [
       { id: 0, name: "Chicken", calories: 500 },
@@ -13,11 +14,25 @@ const ItemCtrl = (function ItemCtrl() {
     totalCalories: 0
   };
 
+  // Generate ID's for the new items to be added
+  const generateID = function generateID() {
+    let id = 0;
+
+    if (data.items.length) {
+      id = data.items[data.items.length - 1].id + 1;
+    }
+
+    return id;
+  };
+
+  // Public Methods
   return {
+    // Return all the items in data
     getItems() {
       return data.items;
     },
 
+    // Calculate and return the total calories
     getTotalCalories() {
       let totalCalories = 0;
 
@@ -30,6 +45,12 @@ const ItemCtrl = (function ItemCtrl() {
       return data.totalCalories;
     },
 
+    // Add new items to the data
+    addItem(name, calories) {
+      const item = { id: generateID, name, calories };
+      data.items.push(item);
+    },
+
     logData() {
       console.log(data);
     }
@@ -40,10 +61,15 @@ const ItemCtrl = (function ItemCtrl() {
 const UICtrl = (function UICtrl() {
   UISelectors = {
     itemListEl: ".item-list",
-    totalCaloriesEl: ".heading-primary__total-calories"
+    totalCaloriesEl: ".heading-primary__total-calories",
+    mealInputEl: ".form__input--meal",
+    caloriesInputEl: ".form__input--calories",
+    addBtn: ".btn--add"
   };
 
   return {
+    UISelectors,
+
     displayItems(items) {
       let html = "";
 
@@ -74,11 +100,20 @@ const App = (function App(StorageCtrl, ItemCtrl, UICtrl) {
   const items = ItemCtrl.getItems();
 
   const totalCalories = ItemCtrl.getTotalCalories();
+
+  // Event Listeners
+  const loadAllEventListeners = function loadAllEventListeners() {
+    document
+      .querySelector(UICtrl.UISelectors.addBtn)
+      .addEventListener("click", function() {});
+  };
+
   return {
     init() {
       UICtrl.displayItems(items);
       UICtrl.displayTotalCalories(totalCalories);
-      console.log(totalCalories);
+
+      loadAllEventListeners();
     }
   };
 })(StorageCtrl, ItemCtrl, UICtrl);
