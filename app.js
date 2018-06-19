@@ -159,7 +159,8 @@ const UICtrl = (function UICtrl() {
   return {
     UISelectors,
 
-    displayItems(items) {
+    displayItems() {
+      const items = ItemCtrl.getItems();
       let html = "";
 
       items.forEach(item => {
@@ -230,15 +231,13 @@ const UICtrl = (function UICtrl() {
 
 // APP Controller
 const App = (function App(StorageCtrl, ItemCtrl, UICtrl) {
-  const items = ItemCtrl.getItems();
-
   const addMealItem = function addMealItem(e) {
     const { name, calories } = UICtrl.getInputVals();
 
     if (name && calories) {
       ItemCtrl.addItem(name, calories);
       UICtrl.clearInputs();
-      UICtrl.displayItems(items);
+      UICtrl.displayItems();
       UICtrl.displayTotalCalories();
     }
 
@@ -274,7 +273,7 @@ const App = (function App(StorageCtrl, ItemCtrl, UICtrl) {
       ItemCtrl.updateCurrentItem(name, calories);
       UICtrl.clearInputs();
       UICtrl.hideEditBtns();
-      UICtrl.displayItems(items);
+      UICtrl.displayItems();
       UICtrl.displayTotalCalories();
     }
 
@@ -285,7 +284,7 @@ const App = (function App(StorageCtrl, ItemCtrl, UICtrl) {
     ItemCtrl.deleteItem();
     UICtrl.clearInputs();
     UICtrl.hideEditBtns();
-    UICtrl.displayItems(ItemCtrl.getItems());
+    UICtrl.displayItems();
     UICtrl.displayTotalCalories();
     e.preventDefault();
   };
@@ -299,7 +298,7 @@ const App = (function App(StorageCtrl, ItemCtrl, UICtrl) {
   const clearAllItems = function clearAllItems(e) {
     StorageCtrl.clearAllItemsInStorage();
     ItemCtrl.resetItemsArr();
-    UICtrl.displayItems(ItemCtrl.getItems());
+    UICtrl.displayItems();
     UICtrl.displayTotalCalories();
     e.preventDefault();
   };
@@ -338,7 +337,7 @@ const App = (function App(StorageCtrl, ItemCtrl, UICtrl) {
   return {
     init() {
       UICtrl.hideEditBtns();
-      UICtrl.displayItems(items);
+      UICtrl.displayItems();
       UICtrl.displayTotalCalories();
 
       loadAllEventListeners();
