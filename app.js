@@ -146,7 +146,7 @@ const ItemCtrl = (function ItemCtrl() {
 const UICtrl = (function UICtrl() {
   UISelectors = {
     itemListEl: ".item-list",
-    totalCaloriesEl: ".heading-primary__total-calories",
+    totalCaloriesEl: ".heading--primary__total-calories",
     mealInputEl: ".form__input--meal",
     caloriesInputEl: ".form__input--calories",
     addBtn: ".btn--add",

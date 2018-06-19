@@ -63,10 +63,15 @@ body {
   color: #fff;
   box-shadow: 0 0.1rem 0.1rem rgba(#000, 0.3);
   border: none;
-  outline: none;
   border-radius: 2px;
   cursor: pointer;
+  transform: translateY(-1px);
   transition: all 0.3s;
+
+  &:focus {
+    outline: none;
+    color: greenyellow;
+  }
 
   &:hover {
     box-shadow: 0 0.2rem 0.2rem rgba(#000, 0.5);
@@ -90,5 +95,91 @@ body {
 
   &--update {
     background-color: #ff9800;
+  }
+}
+
+.form-wrapper {
+  max-width: 80rem;
+  box-shadow: 0 0.1rem 0.1rem rgba(#000, 0.3);
+  padding: 2rem 1.5rem;
+  margin: 2rem auto;
+  border-radius: 2px;
+}
+
+.heading {
+  color: #1565c0;
+
+  &--primary {
+  }
+
+  &--secondary {
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 0.2rem;
+  }
+}
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    "form-heading   form-heading"
+    "form-group-1   form-group-2"
+    "btn-box        btn-box";
+  grid-gap: 2rem;
+
+  &__heading-box {
+    grid-area: form-heading;
+  }
+
+  &__btn-box {
+    grid-area: btn-box;
+    display: flex;
+    justify-content: space-between;
+
+    & > *:not(:last-child) {
+      margin-right: 1rem;
+    }
+
+    & > *:last-child {
+      margin-left: auto;
+    }
+  }
+
+  &__group {
+    display: flex;
+    flex-flow: column;
+    margin-bottom: 2rem;
+
+    &--1 {
+      grid-area: form-group-1;
+    }
+
+    &--2 {
+      grid-area: form-group-2;
+    }
+  }
+
+  &__label {
+    font-size: 1.2rem;
+    color: rgba(#1565c0, 0.4);
+  }
+
+  &__input {
+    display: inline-block;
+    border: none;
+    box-shadow: 0 1px 0px rgba(0, 0, 0, 0.3);
+    padding: 1rem 0;
+    font-size: 1.3rem;
+    transition: all 0.2s;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 1.5px 0px rgba(#26a69a, 0.8);
+
+      .form__label {
+        color: #26a69a !important;
+      }
+    }
   }
 }
