@@ -1,11 +1,27 @@
 // Storage Controller
-const StorageCtrl = (function StorageCtrl() {})();
+const StorageCtrl = (function StorageCtrl() {
+  return {
+    getItemsFromStorage() {
+      let items = null;
+
+      if (!localStorage.getItem("items")) {
+        items = [];
+      } else {
+        items = JSON.parse(localStorage.getItem("items"));
+      }
+
+      return items;
+    },
+
+    setItemsInStorage() {}
+  };
+})();
 
 // Item Controller
 const ItemCtrl = (function ItemCtrl() {
   // State for the whole application
   const data = {
-    items: [{ id: 1, name: "foo", calories: 500 }],
+    items: [],
     currentItemToEdit: null,
     totalCalories: 0
   };
