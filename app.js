@@ -223,6 +223,12 @@ const App = (function App(StorageCtrl, ItemCtrl, UICtrl) {
     e.preventDefault();
   };
 
+  const backBtnHandler = function backBtnHandler(e) {
+    UICtrl.hideEditBtns();
+    UICtrl.clearInputs();
+    e.preventDefault();
+  };
+
   // Prevent default Enter keypress from submitting the form
   const preventEnterKeyPress = function preventEnterKeyPress(e) {
     if (e.keycode === 13 || e.which === 13) {
@@ -242,6 +248,9 @@ const App = (function App(StorageCtrl, ItemCtrl, UICtrl) {
     document
       .querySelector(UICtrl.UISelectors.deleteBtn)
       .addEventListener("click", deleteMealItem);
+    document
+      .querySelector(UICtrl.UISelectors.backBtn)
+      .addEventListener("click", backBtnHandler);
     document
       .querySelector(".item-list")
       .addEventListener("click", editMealItem);
