@@ -12,6 +12,50 @@ html {
 body {
   font-family: sans-serif;
   font-weight: 400;
-  color: #fff;
   line-height: 1.6;
   font-size: 1.6rem; }
+
+.nav {
+  background-color: #2196f3; }
+  .nav__nav-list {
+    list-style: none;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    position: relative; }
+  .nav__nav-link {
+    text-decoration: none;
+    display: inline-block; }
+    .nav__nav-link--brand {
+      color: #fff;
+      font-size: 2.3rem;
+      font-weight: 400;
+      padding: 0.8rem;
+      margin-right: 5rem; }
+    .nav__nav-link--clear:link, .nav__nav-link--clear:visited {
+      color: #fff; }
+
+.btn {
+  display: inline-block;
+  padding: 0.6rem 2rem;
+  font-size: 1.2rem;
+  color: #fff;
+  box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.3);
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.3s; }
+  .btn:hover {
+    box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.5); }
+  .btn--clear {
+    background-color: #90caf9; }
+  .btn--add {
+    background-color: #1565c0; }
+  .btn--back {
+    background-color: #9e9e9e; }
+  .btn--delete {
+    background-color: #f44336; }
+  .btn--update {
+    background-color: #ff9800; }
