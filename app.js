@@ -24,7 +24,7 @@ const StorageCtrl = (function StorageCtrl() {
 
       items.push(item);
 
-      localStorage.setItem("items", items);
+      localStorage.setItem("items", JSON.stringify(items));
     }
   };
 })();
@@ -75,7 +75,9 @@ const ItemCtrl = (function ItemCtrl() {
 
     // Add new items to the data
     addItem(name, calories) {
-      const item = { id: generateID(), name, calories };
+      const id = generateID();
+      const item = { id, name, calories };
+      StorageCtrl.setItemsInStorage(item);
       data.items.push(item);
     },
 
