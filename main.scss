@@ -1,3 +1,9 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media only screen and (max-width: 37.5em) {@content}; //600px
+  }
+}
+
 *,
 *::after,
 *::before {
@@ -9,6 +15,10 @@
 html {
   box-sizing: border-box;
   font-size: 62.5%;
+
+  @include respond(phone) {
+    font-size: 50%;
+  }
 }
 
 body {
@@ -164,7 +174,7 @@ body {
 
   &__label {
     font-size: 1.2rem;
-    color: rgba(#1565c0, 0.4);
+    color: rgba(#1565c0, 0.7);
   }
 
   &__input {
@@ -189,7 +199,7 @@ body {
 .item-list {
   list-style: none;
   max-width: 80rem;
-  margin: 1rem auto;
+  margin: 1rem auto 5rem auto;
 
   &__item {
     display: flex;

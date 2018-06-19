@@ -298,6 +298,8 @@ const App = (function App(StorageCtrl, ItemCtrl, UICtrl) {
   const clearAllItems = function clearAllItems(e) {
     StorageCtrl.clearAllItemsInStorage();
     ItemCtrl.resetItemsArr();
+    UICtrl.clearInputs();
+    UICtrl.hideEditBtns();
     UICtrl.displayItems();
     UICtrl.displayTotalCalories();
     e.preventDefault();
