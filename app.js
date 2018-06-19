@@ -25,6 +25,20 @@ const StorageCtrl = (function StorageCtrl() {
       items.push(item);
 
       localStorage.setItem("items", JSON.stringify(items));
+    },
+
+    updateItemsInStorage(id, name, calories) {
+      const items = JSON.parse(localStorage.getItem("items"));
+
+      const updatedItem = { id, name, calories };
+
+      items.forEach((item, index) => {
+        if (item.id === id) {
+          items.splice(index, 1, updatedItem);
+        }
+      });
+
+      localStorage.setItem("items", JSON.stringify(items));
     }
   };
 })();
@@ -90,6 +104,7 @@ const ItemCtrl = (function ItemCtrl() {
       const item = data.currentItemToEdit;
       item.name = name;
       item.calories = calories;
+      StorageCtrl.updateItemsInStorage(item.id, name, calories);
     },
 
     deleteItem() {
