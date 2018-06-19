@@ -13,7 +13,19 @@ const StorageCtrl = (function StorageCtrl() {
       return items;
     },
 
-    setItemsInStorage() {}
+    setItemsInStorage(item) {
+      let items = null;
+
+      if (!localStorage.getItem("items")) {
+        items = [];
+      } else {
+        items = JSON.parse(localStorage.getItem("items"));
+      }
+
+      items.push(item);
+
+      localStorage.setItem("items", items);
+    }
   };
 })();
 
@@ -21,7 +33,7 @@ const StorageCtrl = (function StorageCtrl() {
 const ItemCtrl = (function ItemCtrl() {
   // State for the whole application
   const data = {
-    items: [],
+    items: [...StorageCtrl.getItemsFromStorage()],
     currentItemToEdit: null,
     totalCalories: 0
   };
