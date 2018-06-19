@@ -51,6 +51,17 @@ const ItemCtrl = (function ItemCtrl() {
       data.items.push(item);
     },
 
+    setCurrentItemToEdit(id) {
+      const item = this.getItemWithID(id);
+      data.currentItemToEdit = item;
+    },
+
+    updateCurrentItem(name, calories) {
+      const item = data.currentItemToEdit;
+      item.name = name;
+      item.calories = calories;
+    },
+
     logData() {
       console.log(data);
     }
@@ -172,6 +183,25 @@ const App = (function App(StorageCtrl, ItemCtrl, UICtrl) {
 
       // Fill input fields with name and calories for the clicked item
       UICtrl.fillInputsWithItemValues(id);
+
+      // Set the item with this id to be the current item for editing
+      ItemCtrl.setCurrentItemToEdit(id);
+    }
+
+    e.preventDefault();
+  };
+
+  const updateMealItem = function updateMealItem(e) {
+    console.log("wow");
+
+    const { name, calories } = UICtrl.getInputVals();
+
+    if (name && calories) {
+      ItemCtrl.updateCurrentItem(name, calories);
+      UICtrl.clearInputs();
+      UICtrl.hideEditBtns();
+      UICtrl.displayItems(items);
+      UICtrl.displayTotalCalories();
     }
 
     e.preventDefault();
@@ -181,6 +211,7 @@ const App = (function App(StorageCtrl, ItemCtrl, UICtrl) {
   const preventEnterKeyPress = function preventEnterKeyPress(e) {
     if (e.keycode === 13 || e.which === 13) {
       e.preventDefault();
+      return false;
     }
   };
 
@@ -189,6 +220,9 @@ const App = (function App(StorageCtrl, ItemCtrl, UICtrl) {
     document
       .querySelector(UICtrl.UISelectors.addBtn)
       .addEventListener("click", addMealItem);
+    document
+      .querySelector(UICtrl.UISelectors.updateBtn)
+      .addEventListener("click", updateMealItem);
     document
       .querySelector(".item-list")
       .addEventListener("click", editMealItem);
