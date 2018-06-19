@@ -5,7 +5,7 @@ const StorageCtrl = (function StorageCtrl() {})();
 const ItemCtrl = (function ItemCtrl() {
   // State for the whole application
   const data = {
-    items: [{ id: 0, name: "foo", calories: 500 }],
+    items: [{ id: 1, name: "foo", calories: 500 }],
     currentItemToEdit: null,
     totalCalories: 0
   };
@@ -26,6 +26,10 @@ const ItemCtrl = (function ItemCtrl() {
     // Return all the items in data
     getItems() {
       return data.items;
+    },
+
+    getItemWithID(id) {
+      return data.items.filter(item => item.id === id)[0];
     },
 
     // Calculate and return the total calories
@@ -74,7 +78,7 @@ const UICtrl = (function UICtrl() {
 
       items.forEach(item => {
         html += `
-        <li class="item-list__item">
+        <li class="item-list__item item-list__item--${item.id}">
           <strong class="item-list__meal">${item.name}:
           </strong>
           <em class="item-list__calories">${item.calories} Calories</em>
@@ -127,6 +131,13 @@ const UICtrl = (function UICtrl() {
 
       document.querySelector(mealInputEl).value = "";
       document.querySelector(caloriesInputEl).value = "";
+    },
+
+    fillInputsWithItemValues(id) {
+      const item = ItemCtrl.getItemWithID(id);
+      document.querySelector(this.UISelectors.mealInputEl).value = item.name;
+      document.querySelector(this.UISelectors.caloriesInputEl).value =
+        item.calories;
     }
   };
 })();
@@ -150,7 +161,17 @@ const App = (function App(StorageCtrl, ItemCtrl, UICtrl) {
 
   const editMealItem = function editMealItem(e) {
     if (e.target.classList.contains("item-list__edit-icon")) {
+      const className = e.target.parentElement.className;
+
+      // Regex to pull out the id from the className
+      let re = /[^\d+]/g;
+
+      let id = parseInt(className.replace(re, ""));
+
       UICtrl.showEditBtns();
+
+      // Fill input fields with name and calories for the clicked item
+      UICtrl.fillInputsWithItemValues(id);
     }
 
     e.preventDefault();
