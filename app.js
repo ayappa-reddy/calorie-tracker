@@ -62,6 +62,14 @@ const ItemCtrl = (function ItemCtrl() {
       item.calories = calories;
     },
 
+    deleteItem() {
+      const remainingItems = data.items.filter(
+        item => item.id !== data.currentItemToEdit.id
+      );
+      data.currentItemToEdit = null;
+      data.items = remainingItems;
+    },
+
     logData() {
       console.log(data);
     }
@@ -192,11 +200,10 @@ const App = (function App(StorageCtrl, ItemCtrl, UICtrl) {
   };
 
   const updateMealItem = function updateMealItem(e) {
-    console.log("wow");
-
     const { name, calories } = UICtrl.getInputVals();
 
     if (name && calories) {
+      // update the currentItem with input values
       ItemCtrl.updateCurrentItem(name, calories);
       UICtrl.clearInputs();
       UICtrl.hideEditBtns();
@@ -204,6 +211,15 @@ const App = (function App(StorageCtrl, ItemCtrl, UICtrl) {
       UICtrl.displayTotalCalories();
     }
 
+    e.preventDefault();
+  };
+
+  const deleteMealItem = function deleteMealItem(e) {
+    ItemCtrl.deleteItem();
+    UICtrl.clearInputs();
+    UICtrl.hideEditBtns();
+    UICtrl.displayItems(ItemCtrl.getItems());
+    UICtrl.displayTotalCalories();
     e.preventDefault();
   };
 
@@ -223,6 +239,9 @@ const App = (function App(StorageCtrl, ItemCtrl, UICtrl) {
     document
       .querySelector(UICtrl.UISelectors.updateBtn)
       .addEventListener("click", updateMealItem);
+    document
+      .querySelector(UICtrl.UISelectors.deleteBtn)
+      .addEventListener("click", deleteMealItem);
     document
       .querySelector(".item-list")
       .addEventListener("click", editMealItem);
