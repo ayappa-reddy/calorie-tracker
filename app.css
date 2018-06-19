@@ -72,6 +72,9 @@ body {
 
 .heading {
   color: #1565c0; }
+  .heading--primary {
+    font-size: 4rem;
+    font-weight: 400; }
   .heading--secondary {
     font-size: 2rem;
     font-weight: 400;
@@ -113,5 +116,37 @@ body {
     .form__input:focus {
       outline: none;
       box-shadow: 0 1.5px 0px rgba(38, 166, 154, 0.8); }
-      .form__input:focus .form__label {
-        color: #26a69a !important; }
+
+.heading-box {
+  text-align: center; }
+
+.item-list {
+  list-style: none;
+  max-width: 80rem;
+  margin: 1rem auto; }
+  .item-list__item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border: 0.1rem solid rgba(0, 0, 0, 0.1);
+    border-radius: 2px; }
+    .item-list__item:not(:last-child) {
+      margin-bottom: 1rem; }
+    .item-list__item > *:last-child {
+      margin-left: auto; }
+  .item-list__meal {
+    color: #1565c0; }
+  .item-list__calories {
+    color: #1565c0; }
+  .item-list__edit-icon {
+    color: #fff;
+    display: inline-block;
+    font-size: 1rem;
+    background-color: #1565c0;
+    box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.3);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s; }
+    .item-list__edit-icon:hover {
+      box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.5); }

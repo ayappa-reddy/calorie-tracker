@@ -110,6 +110,8 @@ body {
   color: #1565c0;
 
   &--primary {
+    font-size: 4rem;
+    font-weight: 400;
   }
 
   &--secondary {
@@ -176,10 +178,56 @@ body {
     &:focus {
       outline: none;
       box-shadow: 0 1.5px 0px rgba(#26a69a, 0.8);
+    }
+  }
+}
 
-      .form__label {
-        color: #26a69a !important;
-      }
+.heading-box {
+  text-align: center;
+}
+
+.item-list {
+  list-style: none;
+  max-width: 80rem;
+  margin: 1rem auto;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border: 0.1rem solid rgba(#000, 0.1);
+    border-radius: 2px;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+
+    & > *:last-child {
+      margin-left: auto;
+    }
+  }
+
+  &__meal {
+    color: #1565c0;
+  }
+
+  &__calories {
+    color: #1565c0;
+  }
+
+  &__edit-icon {
+    color: #fff;
+    display: inline-block;
+    font-size: 1rem;
+    background-color: #1565c0;
+    box-shadow: 0 0.1rem 0.1rem rgba(#000, 0.3);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      box-shadow: 0 0.2rem 0.2rem rgba(#000, 0.5);
     }
   }
 }

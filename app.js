@@ -166,10 +166,10 @@ const UICtrl = (function UICtrl() {
       items.forEach(item => {
         html += `
         <li class="item-list__item item-list__item--${item.id}">
-          <strong class="item-list__meal">${item.name}:
+          <strong class="item-list__meal">${item.name}: 
           </strong>
-          <em class="item-list__calories">${item.calories} Calories</em>
-          <span class="item-list__edit-icon">E</span>
+          <em class="item-list__calories">&nbsp${item.calories} Calories</em>
+          <span class="item-list__edit-icon">Edit</span>
         </li>
         `;
       });
